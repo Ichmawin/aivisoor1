@@ -9,7 +9,7 @@ from fastapi.middleware.trustedhost import TrustedHostMiddleware
 from fastapi.responses import JSONResponse
 from fastapi.exceptions import RequestValidationError
 
-from app.core.config import settings
+from config import settings
 from app.core.database import init_db
 from app.auth.router import router as auth_router
 from app.subscriptions.router import router as sub_router
