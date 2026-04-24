@@ -1,5 +1,6 @@
-uvicorn
+
 fastapi
 uvicorn
 sentry-sdk
+pydantic>=2.0
 pydantic-settings
