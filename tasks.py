@@ -8,8 +8,8 @@ logger = logging.getLogger(__name__)
 def reset_monthly_usage(self):
     """Reset reports_used counter for all subscriptions on 1st of month."""
     import asyncio
-    from app.core.database import AsyncSessionLocal
-    from app.subscriptions.models import Subscription
+    from database import AsyncSessionLocal
+    from subscriptions.models import Subscription
     from sqlalchemy import select
     from datetime import datetime, timezone
 
@@ -31,12 +31,12 @@ def reset_monthly_usage(self):
 def send_weekly_digest(self):
     """Send weekly summary email to active users with recent reports."""
     import asyncio
-    from app.core.database import AsyncSessionLocal
-    from app.auth.models import User
-    from app.reports.models import Report, ReportStatus
+    from database import AsyncSessionLocal
+    from models import User
+    from reports.models import Report, ReportStatus
     from sqlalchemy import select, and_
     from datetime import datetime, timedelta, timezone
-    from app.core.email import send_email
+    from email import send_email
 
     async def _run():
         week_ago = datetime.now(timezone.utc) - timedelta(days=7)
