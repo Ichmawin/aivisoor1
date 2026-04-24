@@ -10,12 +10,12 @@ from fastapi.responses import JSONResponse
 from fastapi.exceptions import RequestValidationError
 
 from config import settings
-from app.core.database import init_db
-from app.auth.router import router as auth_router
-from app.subscriptions.router import router as sub_router
-from app.reports.service import router as reports_router
-from app.projects.router import router as projects_router
-from app.admin.router import router as admin_router
+from database import init_db
+from auth.router import router as auth_router
+from subscriptions.router import router as sub_router
+from reports.service import router as reports_router
+from projects.router import router as projects_router
+from admin.router import router as admin_router
 
 # ── Logging ───────────────────────────────────────────────────────────────────
 
