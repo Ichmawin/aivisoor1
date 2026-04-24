@@ -1,7 +1,7 @@
 from pydantic import BaseModel, EmailStr, field_validator, ConfigDict
 from uuid import UUID
 from datetime import datetime
-from app.auth.models import UserRole
+from models import UserRole
 
 
 class UserRegister(BaseModel):
