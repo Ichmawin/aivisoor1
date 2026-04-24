@@ -3,7 +3,7 @@ import httpx
 import json
 import re
 from openai import AsyncOpenAI
-from app.core.config import settings
+from config import settings
 import logging
 
 logger = logging.getLogger(__name__)
