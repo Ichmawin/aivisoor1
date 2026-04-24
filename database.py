@@ -2,7 +2,7 @@ from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine, async_sess
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 from sqlalchemy import DateTime, func
 from datetime import datetime
-from app.core.config import settings
+from config import settings
 import logging
 
 logger = logging.getLogger(__name__)
