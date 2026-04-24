@@ -4,10 +4,10 @@ from sqlalchemy import select
 from fastapi import HTTPException, status
 from datetime import datetime, timezone
 
-from app.core.config import settings
-from app.auth.models import User
-from app.subscriptions.models import Subscription, PlanName, PLAN_METADATA
-from app.core.email import send_email
+from config import settings
+from models import User
+from subscriptions.models import Subscription, PlanName, PLAN_METADATA
+from email import send_email
 import logging
 
 logger = logging.getLogger(__name__)
