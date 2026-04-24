@@ -1,0 +1,66 @@
+[tool.poetry]
+name = "aivisoor-backend"
+version = "1.0.0"
+description = "AIVisoor — AI Visibility Analytics Platform"
+authors = ["AIVisoor Team"]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+
+# Web framework
+fastapi = "^0.115.0"
+uvicorn = {extras = ["standard"], version = "^0.30.0"}
+python-multipart = "^0.0.9"
+
+# Database
+sqlalchemy = {extras = ["asyncio"], version = "^2.0.0"}
+asyncpg = "^0.29.0"
+alembic = "^1.13.0"
+
+# Settings
+pydantic-settings = "^2.4.0"
+pydantic = {extras = ["email"], version = "^2.8.0"}
+
+# Security
+python-jose = {extras = ["cryptography"], version = "^3.3.0"}
+passlib = {extras = ["bcrypt"], version = "^1.7.4"}
+pyotp = "^2.9.0"
+qrcode = {extras = ["pil"], version = "^7.4.2"}
+
+# Redis
+redis = {extras = ["asyncio"], version = "^5.0.0"}
+
+# HTTP client
+httpx = "^0.27.0"
+
+# AI
+openai = "^1.40.0"
+
+# Payments
+stripe = "^10.0.0"
+
+# Email
+resend = "^2.0.0"
+
+# Monitoring
+sentry-sdk = {extras = ["fastapi"], version = "^2.0.0"}
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.0.0"
+pytest-asyncio = "^0.23.0"
+pytest-cov = "^5.0.0"
+httpx = "^0.27.0"
+ruff = "^0.5.0"
+mypy = "^1.10.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]

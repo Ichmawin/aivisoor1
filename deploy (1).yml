@@ -1,0 +1,56 @@
+name: Deploy AIVisoor
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env: { POSTGRES_DB: aivisoor_test, POSTGRES_USER: aivisoor, POSTGRES_PASSWORD: testpass }
+        options: --health-cmd pg_isready --health-interval 10s --health-retries 5
+      redis:
+        image: redis:7-alpine
+        options: --health-cmd "redis-cli ping" --health-interval 10s
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - run: pip install poetry==1.8.3
+      - run: poetry install --no-root
+        working-directory: ./backend
+      - run: poetry run pytest -v
+        working-directory: ./backend
+        env:
+          DATABASE_URL: postgresql+asyncpg://aivisoor:testpass@localhost:5432/aivisoor_test
+          REDIS_URL: redis://localhost:6379/0
+          APP_SECRET_KEY: test-key-minimum-32-characters-here!!
+          JWT_SECRET_KEY: test-jwt-minimum-32-characters-here!!
+          APP_ENV: testing
+          OPENAI_API_KEY: test
+          PERPLEXITY_API_KEY: test
+          STRIPE_SECRET_KEY: test
+          STRIPE_WEBHOOK_SECRET: test
+          STRIPE_PRICE_STARTER: test
+          STRIPE_PRICE_PRO: test
+          STRIPE_PRICE_AGENCY: test
+          RESEND_API_KEY: test
+
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          script: |
+            cd /opt/aivisoor && git pull origin main
+            docker compose build && docker compose up -d
+            docker compose exec -T backend poetry run alembic upgrade head
+            docker image prune -f
