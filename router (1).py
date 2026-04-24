@@ -7,9 +7,9 @@ from sqlalchemy import select, desc
 from fastapi import APIRouter, Depends, HTTPException, status
 from pydantic import BaseModel
 
-from app.core.database import Base, get_db
-from app.auth.dependencies import get_current_user, require_verified
-from app.auth.models import User
+from core.database import Base, get_db
+from auth.dependencies import get_current_user, require_verified
+from auth.models import User
 
 
 # ── Model ─────────────────────────────────────────────────────────────────────
