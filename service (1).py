@@ -4,15 +4,15 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 from fastapi import HTTPException, status
 
-from app.auth.models import User
-from app.auth.schemas import UserRegister, UserUpdate, PasswordChange
-from app.core.security import (
+from models import User
+from schemas import UserRegister, UserUpdate, PasswordChange
+from security import (
     hash_password, verify_password, validate_password_strength,
     create_access_token, create_refresh_token, decode_token,
     generate_2fa_secret, generate_2fa_qr, verify_2fa_code, generate_api_key,
 )
-from app.core.email import send_email
-from app.core.config import settings
+from email import send_email
+from config import settings
 import logging
 
 logger = logging.getLogger(__name__)
