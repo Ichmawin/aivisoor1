@@ -3,11 +3,11 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select, func, desc
 from datetime import datetime, timedelta, timezone
 
-from app.core.database import get_db
-from app.auth.dependencies import require_admin
-from app.auth.models import User, UserRole
-from app.reports.models import Report, ReportStatus
-from app.subscriptions.models import Subscription, PlanName
+from database import get_db
+from dependencies import require_admin
+from models import User, UserRole
+from reports.models import Report, ReportStatus
+from subscriptions.models import Subscription, PlanName
 
 router = APIRouter(prefix="/admin", tags=["Admin"])
 
