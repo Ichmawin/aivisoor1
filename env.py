@@ -4,14 +4,14 @@ from sqlalchemy import pool
 from sqlalchemy.ext.asyncio import async_engine_from_config
 from alembic import context
 
-from app.core.config import settings
-from app.core.database import Base
+from config import settings
+from database import Base
 
 # Import all models so Alembic detects them
-from app.auth.models import User  # noqa
-from app.subscriptions.models import Subscription  # noqa
-from app.projects.router import Project  # noqa
-from app.reports.models import Report  # noqa
+from models import User  # noqa
+from subscriptions.models import Subscription  # noqa
+from projects.router import Project  # noqa
+from reports.models import Report  # noqa
 
 config = context.config
 config.set_main_option("sqlalchemy.url", settings.DATABASE_URL)
